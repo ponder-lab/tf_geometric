@@ -1,0 +1,9 @@
+# Packages tf_geometric needs on top of an environment providing TensorFlow 2.9.3 and NumPy 1.23.5,
+# for demo/demo_mean_pool.py. The package is not installed; the demo imports it from the source tree.
+# These are setup.py's install_requires that the base environment lacks (networkx, scipy,
+# scikit-learn and tqdm are already there), plus what ogb_lite imports at load time, pinned to
+# versions that install on Python 3.10 alongside NumPy 1.23.5 without changing it.
+tf_sparse==0.0.17
+ogb_lite==0.0.3
+pandas==1.5.3
+outdated==0.2.2
