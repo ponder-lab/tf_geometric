@@ -6,6 +6,9 @@ import tensorflow as tf
 import numpy as np
 from sklearn.model_selection import train_test_split
 
+from scripts.utils import write_csv
+import timeit
+
 # TU Datasets: https://ls11-www.cs.tu-dortmund.de/staff/morris/graphkerneldatasets
 graph_dicts = tfg.datasets.TUDataset("NCI1").load_data()
 
@@ -109,7 +112,15 @@ optimizer = tf.keras.optimizers.Adam(learning_rate=5e-3)
 
 train_batch_generator = create_graph_generator(train_graphs, batch_size, shuffle=True, infinite=True)
 
-for step in range(2000):
+num_steps = 2000
+
+start_time = timeit.default_timer()
+skipped_time = 0
+
+total_loss = 0
+loss_count = 0
+
+for step in range(num_steps):
     train_batch_graph = next(train_batch_generator)
     with tf.GradientTape() as tape:
         logits = forward(train_batch_graph, training=True)
@@ -122,7 +133,17 @@ for step in range(2000):
     grads = tape.gradient(losses, vars)
     optimizer.apply_gradients(zip(grads, vars))
 
+    total_loss += tf.reduce_mean(losses)
+    loss_count += 1
+
     if step % 20 == 0:
         mean_loss = tf.reduce_mean(losses)
         accuracy = evaluate()
+        print_time = timeit.default_timer()
         print("step = {}\tloss = {}\taccuracy = {}".format(step, mean_loss, accuracy))
+        skipped_time += timeit.default_timer() - print_time
+
+time = timeit.default_timer() - start_time - skipped_time
+avg_loss = float(total_loss) / float(loss_count)
+
+write_csv(__file__, num_steps, float(accuracy), avg_loss, time)
