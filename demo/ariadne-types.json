@@ -1,0 +1,12 @@
+{
+  "types": [
+    {
+      "module": "demo_mean_pool.py",
+      "function": "convert_node_labels_to_one_hot",
+      "variable": "x",
+      "dtype": "float32",
+      "shape": "n 37",
+      "attribution": "One-hot node features np.zeros([num_nodes, num_node_labels], dtype=np.float32) (demo_mean_pool.py:22-26). num_node_labels is the number of distinct node labels in NCI1_node_labels.txt, which TUDataset._convert_label_ids_to_indices maps to indices 0..k-1 (tf_geometric/datasets/tu.py:30-55). Measured 2026-10-11 over the NCI1 archive the demo loads: 122747 nodes with 37 distinct labels, 1 through 37. The node count varies per graph. The module path is relative to demo/, the source root Ariadne names this script against."
+    }
+  ]
+}
