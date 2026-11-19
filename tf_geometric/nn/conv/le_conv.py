@@ -2,6 +2,7 @@
 import tensorflow as tf
 
 
+@tf.function
 def le_conv(x, edge_index, edge_weight,
             self_kernel, self_bias,
             aggr_self_kernel, aggr_self_bias,

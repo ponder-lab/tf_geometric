@@ -6,6 +6,7 @@ from tf_sparse import SparseMatrix
 from tf_geometric.utils.graph_utils import convert_dense_adj_to_edge
 
 
+@tf.function
 def cluster_pool(x, edge_index, edge_weight, assign_edge_index, assign_edge_weight, num_clusters, num_nodes=None):
     """
     Coarsen the input Graph based on cluster assignment of nodes and output pooled Graph.

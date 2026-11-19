@@ -57,6 +57,7 @@ def forward(graph, training=False):
     return h
 
 
+@tf.function
 def compute_loss(logits, vars):
     losses = tf.nn.sigmoid_cross_entropy_with_logits(
         logits=logits,

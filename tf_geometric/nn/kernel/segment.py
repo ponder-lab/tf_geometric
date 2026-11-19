@@ -23,6 +23,7 @@ def segment_op_with_pad(segment_op, data, segment_ids, num_segments):
     return outputs
 
 
+@tf.function
 def segment_softmax(data, segment_ids, num_segments):
     max_values = tf.math.unsorted_segment_max(data, segment_ids, num_segments=num_segments)
     gathered_max_values = tf.gather(max_values, segment_ids)
@@ -33,6 +34,7 @@ def segment_softmax(data, segment_ids, num_segments):
     return score
 
 
+@tf.function
 def segment_count(index, num_segments=None):
     data = tf.ones_like(index)
     if num_segments is None:

@@ -23,6 +23,7 @@ class GIN(tf.keras.Model):
             self.eps = self.add_weight("eps", shape=[], initializer="zeros")
 
 
+    @tf.function
     def call(self, inputs, cache=None, training=None, mask=None):
         """
 

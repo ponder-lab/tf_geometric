@@ -4,6 +4,7 @@ import tensorflow as tf
 from tf_geometric.nn.kernel.segment import segment_count, segment_op_with_pad
 
 
+@tf.function
 def mean_pool(x, node_graph_index, num_graphs=None):
     if num_graphs is None:
         num_graphs = tf.reduce_max(node_graph_index) + 1
@@ -12,6 +13,7 @@ def mean_pool(x, node_graph_index, num_graphs=None):
     return sum_x / (tf.cast(tf.expand_dims(num_nodes_of_graphs, -1), tf.float32) + 1e-8)
 
 
+@tf.function
 def sum_pool(x, node_graph_index, num_graphs=None):
     if num_graphs is None:
         num_graphs = tf.reduce_max(node_graph_index) + 1

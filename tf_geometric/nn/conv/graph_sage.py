@@ -6,6 +6,7 @@ from tf_geometric.nn import mean_reducer, max_reducer, sum_reducer
 from tf_geometric.nn.conv.gcn import gcn_mapper, gcn_norm_edge
 
 
+@tf.function
 def mean_graph_sage(x, edge_index, edge_weight,
                     self_kernel,
                     neighbor_kernel,
