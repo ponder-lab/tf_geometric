@@ -76,6 +76,7 @@ class GCNModel(tf.keras.Model):
             for i, units in enumerate(units_list)
         ]
 
+    @tf.function
     def call(self, inputs, training=None, mask=None):
         x, edge_index, edge_weight = inputs
         h = x
