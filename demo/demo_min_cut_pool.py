@@ -182,7 +182,9 @@ optimizer = tf.keras.optimizers.Adam(learning_rate=1e-3)
 
 train_batch_generator = create_graph_generator(train_graphs, batch_size, shuffle=True, infinite=True)
 
-for step in tqdm(range(20000)):
+# Bound for the corpus harness: 500 steps (shipped: 20000), chosen by time, since these
+# functions retrace on NCI1's varying graph sizes at every length (bound trial).
+for step in tqdm(range(500)):
     train_batch_graph = next(train_batch_generator)
     with tf.GradientTape() as tape:
         logits, (cut_loss, orth_loss) = forward(train_batch_graph, training=True, return_losses=True)
