@@ -76,6 +76,7 @@ class GCNModel(tf.keras.Model):
             for i, units in enumerate(units_list)
         ]
 
+    @tf.function
     def call(self, inputs, training=None, mask=None):
         x, edge_index, edge_weight = inputs
         h = x
@@ -93,6 +94,7 @@ class AssignGCNModel(tf.keras.Model):
             tf.keras.layers.Dense(units, activation=tf.nn.relu if i < len(mlp_units_list) - 1 else None)
             for i, units in enumerate(mlp_units_list)
         ])
+    @tf.function
     def call(self, inputs, training=None, mask=None):
         x, edge_index, edge_weight = inputs
         h = self.gcn_model([x, edge_index, edge_weight], training=training)

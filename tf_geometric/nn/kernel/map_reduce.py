@@ -12,10 +12,12 @@ def neighbor_count_mapper(repeated_x, neighbor_x, edge_weight=None):
     return tf.ones([neighbor_x.shape[0], 1])
 
 
+@tf.function
 def sum_reducer(neighbor_msg, node_index, num_nodes=None):
     return tf.math.unsorted_segment_sum(neighbor_msg, node_index, num_segments=num_nodes)
 
 
+@tf.function
 def sum_updater(x, reduced_neighbor_msg):
     return x + reduced_neighbor_msg
 
@@ -24,6 +26,7 @@ def identity_updater(x, reduced_neighbor_msg):
     return reduced_neighbor_msg
 
 
+@tf.function
 def mean_reducer(neighbor_msg, node_index, num_nodes=None):
     return tf.math.unsorted_segment_mean(neighbor_msg, node_index, num_segments=num_nodes)
 
