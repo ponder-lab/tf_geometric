@@ -60,6 +60,7 @@ class MeanGraphSage(tf.keras.Model):
         if self.use_bias:
             self.bias = self.add_weight("bias", shape=[self.units], initializer="zeros", regularizer=self.bias_regularizer)
 
+    @tf.function
     def call(self, inputs, cache=None, training=None, mask=None):
         """
 
@@ -135,6 +136,7 @@ class SumGraphSage(tf.keras.Model):
         if self.use_bias:
             self.bias = self.add_weight("bias", shape=[self.units], initializer="zeros", regularizer=self.bias_regularizer)
 
+    @tf.function
     def call(self, inputs, cache=None, training=None, mask=None):
         """
 
